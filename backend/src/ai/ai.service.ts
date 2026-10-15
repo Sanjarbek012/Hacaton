@@ -36,16 +36,21 @@ export class AiService {
     const topic = await this.topics.findOne({ where: { id: dto.topicId } });
     if (!topic) throw new NotFoundException('Mavzu topilmadi');
 
-    const goal = (topic.simKey && SIM_GOALS[topic.simKey]) || "Bu mavzu uchun tajriba hali tayyor emas.";
+    const goal =
+      (topic.simKey && SIM_GOALS[topic.simKey]) ||
+      (topic.simKey
+        ? `"${topic.title}" mavzusi bo'yicha virtual tajriba: o'quvchi parametrlarni o'zgartirib, natijani (sonlar, grafik, animatsiya) kuzatadi. Javobni faqat o'quvchi ko'rayotgan holatga tayanib ber.`
+        : "Bu mavzu uchun tajriba hali tayyor emas.");
     const system = [
       "Sen maktab o'quvchilari uchun virtual laboratoriyaning AI yordamchisisan.",
       `Fan: ${SUBJECT_UZ[topic.subject]}. Sinf: ${topic.grade}-sinf. Mavzu: ${topic.title}.`,
       `Tajriba maqsadi: ${goal}`,
-      "O'zbek tilida (lotin yozuvi) yoz. Sodda, qisqa (120–180 so'z) va shu sinf darajasiga mos bo'l.",
-      "O'quvchi ko'rayotgan aniq sonlar va moddalarga tayan. Sababni tushuntir: nima uchun shunday bo'ladi.",
-      "Faqat shu laboratoriya va mavzu bo'yicha javob ber. Aniq bilmasang, taxmin qilma, shuni ayt.",
+      "O'zbek tilida (lotin yozuvi) yoz, oddiy va tushunarli, shu sinf o'quvchisiga mos. Hajmi 80–150 so'z.",
+      "Javob tuzilishi: 1) bitta qisqa jumlada asosiy xulosa; 2) 2–4 qisqa gapda sababi (nima uchun shunday bo'lishi); 3) bitta savol yoki keyingi qadam taklifi (masalan, qaysi parametrni o'zgartirib ko'rish).",
+      "Tajriba holati berilgan bo'lsa, undagi 1–3 ta eng muhim sonni keltir va ularning bir-biriga ta'sirini tushuntir. Hamma qiymatni birma-bir sanab chiqma.",
+      "Faqat shu laboratoriya va mavzu bo'yicha javob ber. Aniq bilmasang, taxmin qilma, shuni ayt. Formulalarni oddiy matnda yoz (masalan, v = g·t), LaTeX ishlatma.",
       "Xavfsizlik: real hayotda xavfli tajribalarni (zaharli gaz, portlovchi aralashmalar, xavfli moddalar tayyorlash) o'rgatma. Bunday so'rov bo'lsa, virtual tajribalar bilan cheklan va ustoz nazoratini eslat.",
-      "Markdown sarlavhalari va jadval ishlatma. Qadamlar kerak bo'lsa, oddiy raqamlangan ro'yxat yoz.",
+      "Format: oddiy matn. Yulduzcha (**), # sarlavha, jadval va kod bloki ishlatma. Qadamlar kerak bo'lsa, har birini yangi qatorda '1.', '2.' bilan yoz. Javobni oxirigacha yoz, jumla o'rtasida to'xtatma.",
     ].join('\n');
 
     const state = JSON.stringify(dto.state ?? {}).slice(0, 1500);
@@ -64,7 +69,16 @@ export class AiService {
     while (history.length && history[0].role !== 'user') history.shift();
 
     const answer = await this.complete(system, [...history, { role: 'user', content: prompt }]);
-    return { answer };
+    return { answer: this.tidy(answer) };
+  }
+
+  /** Modeldan qolib ketgan markdown belgilarini tozalaydi (frontend ham ko'rsata oladi, lekin bu zaxira). */
+  private tidy(text: string): string {
+    return text
+      .replace(/^#{1,6}\s+/gm, '')
+      .replace(/\*\*(.+?)\*\*/g, '$1')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
   }
 
   private checkRate(userId: number) {

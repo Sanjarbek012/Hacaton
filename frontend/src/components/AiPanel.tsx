@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { aiAssist } from '../api';
 import type { AiMode, ChatMsg } from '../types';
+import RichText from './RichText';
 
 interface Props {
   topicId: number;
@@ -63,7 +64,7 @@ export default function AiPanel({ topicId, state }: Props) {
         )}
         {msgs.map((m, i) => (
           <div key={i} className={m.role === 'user' ? 'bubble me' : 'bubble ai'}>
-            {m.content}
+            {m.role === 'user' ? m.content : <RichText text={m.content} />}
           </div>
         ))}
         {busy && (

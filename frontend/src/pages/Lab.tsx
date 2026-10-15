@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getTopics } from '../api';
 import AiPanel from '../components/AiPanel';
 import Backdrop from '../components/Backdrop';
+import Bench from '../components/Bench';
 import FlaskArt from '../components/FlaskArt';
 import Loader from '../components/Loader';
 import ResultsList from '../components/ResultsList';
@@ -93,6 +94,7 @@ export default function Lab({ subject, grade, onSubject, onGrade }: Props) {
               {Sim ? (
                 <SimStateContext.Provider value={setSimState}>
                   <Sim key={selected.id} topicId={selected.id} onSaved={() => setRefreshKey((k) => k + 1)} />
+                  <Bench subject={selected.subject} />
                   <AiPanel key={`ai-${selected.id}`} topicId={selected.id} state={simState} />
                   <ResultsList title="Mening natijalarim" topicId={selected.id} refreshKey={refreshKey} />
                 </SimStateContext.Provider>

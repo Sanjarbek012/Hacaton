@@ -9,6 +9,7 @@ import Cell from './simulations/Cell';
 import Photosynthesis from './simulations/Photosynthesis';
 import Osmosis from './simulations/Osmosis';
 import Mixing from './simulations/Mixing';
+import { LABS } from './labs';
 
 /** Yangi simulyatsiya qo'shish: komponent yozing, bu yerga kalit bilan ulang,
  *  backend/src/topics/curriculum.ts da mavzuga shu kalitni bering. */
@@ -22,4 +23,5 @@ export const SIMULATIONS: Record<string, ComponentType<SimProps>> = {
   photosynthesis: Photosynthesis,
   osmosis: Osmosis,
   mixing: Mixing,
+  ...LABS,
 };

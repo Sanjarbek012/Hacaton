@@ -28,8 +28,9 @@ export default function App() {
       <div key={view} className="swap-in">
       {view === 'home' ? (
         <Home
-          onOpen={(s) => {
+          onOpen={(s, g) => {
             changeSubject(s);
+            if (g) setGrade(g);
             setView('lab');
           }}
         />

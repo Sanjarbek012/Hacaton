@@ -25,6 +25,7 @@ export default function Header({ view, onNavigate }: Props) {
         </button>
       </nav>
       <div className="user">
+        <span className="avatar" aria-hidden="true">{user?.fullName.trim().charAt(0).toUpperCase()}</span>
         <span className="user-name">{user?.fullName}</span>
         <button className="nav-btn" onClick={signOut}>
           Chiqish

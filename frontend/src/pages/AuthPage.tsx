@@ -40,8 +40,14 @@ export default function AuthPage() {
         {DOTS.map((d, i) => (
           <span key={i} className="dot" style={{ left: `${d.x}%`, top: `${d.y}%`, width: d.s, height: d.s, '--t': `${d.t}s`, animationDelay: `${d.delay}s` } as CSSProperties} />
         ))}
-        <h1>Virtual laboratoriya</h1>
-        <p>Fizika, kimyo va biologiya tajribalarini xavfsiz, o‘zingiz sinab ko‘ring. AI yordamchi har qadamda nima sodir bo‘layotganini tushuntiradi.</p>
+        <span className="wordmark">Virtual laboratoriya</span>
+        <h1>Tajribani o‘zingiz sinab ko‘ring</h1>
+        <p>Slayderni suring, moddalarni aralashtiring, natijani darhol ko‘ring. Xavfsiz, hech narsa to‘kilmaydi.</p>
+        <ul className="facts">
+          <li data-subject="physics">Fizika, 7–11-sinf</li>
+          <li data-subject="chemistry">Kimyo, 7–11-sinf</li>
+          <li data-subject="biology">Biologiya, 5–11-sinf</li>
+        </ul>
         <svg className="flask" viewBox="0 0 200 220" aria-hidden="true">
           <defs>
             <clipPath id="fl">
@@ -74,19 +80,23 @@ export default function AuthPage() {
             </button>
           </div>
 
+          <div className="auth-title">
+            <h2>{mode === 'login' ? 'Qaytganingiz yaxshi' : 'Hisob yaratish'}</h2>
+            <p>{mode === 'login' ? 'Natijalaringiz saqlanishi uchun kiring.' : 'Bir daqiqada tayyor bo‘ladi.'}</p>
+          </div>
           {mode === 'register' && (
             <label className="field">
               Ism va familiya
-              <input value={fullName} onChange={(e) => setFullName(e.target.value)} autoComplete="name" maxLength={80} />
+              <input value={fullName} onChange={(e) => setFullName(e.target.value)} autoComplete="name" maxLength={80} placeholder="Masalan, Aziza Karimova" />
             </label>
           )}
           <label className="field">
             Email
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" placeholder="ism@pochta.uz" />
           </label>
           <label className="field">
             Parol
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete={mode === 'login' ? 'current-password' : 'new-password'} />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete={mode === 'login' ? 'current-password' : 'new-password'} placeholder={mode === 'login' ? '' : 'Kamida 6 ta belgi'} />
           </label>
 
           {error && <p key={error} className="error shake" role="alert">{error}</p>}

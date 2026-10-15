@@ -9,6 +9,17 @@ function fmt(v: unknown): string {
   return String(v);
 }
 
+function ago(iso: string): string {
+  const m = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+  if (m < 1) return 'hozirgina';
+  if (m < 60) return `${m} daqiqa oldin`;
+  const h = Math.round(m / 60);
+  if (h < 24) return `${h} soat oldin`;
+  const d = Math.round(h / 24);
+  if (d < 30) return `${d} kun oldin`;
+  return new Date(iso).toLocaleDateString('uz-UZ');
+}
+
 interface Props {
   topicId?: number;
   refreshKey?: number;
@@ -41,13 +52,13 @@ export default function ResultsList({ topicId, refreshKey = 0, title, limit = 8,
         {(items ?? []).map((r, i) => (
           <li key={r.id} data-subject={r.subject} style={{ '--i': i } as CSSProperties}>
             <div className="results-head">
-              <strong>{showTopic ? r.topicTitle : new Date(r.createdAt).toLocaleString('uz-UZ')}</strong>
+              <strong>{showTopic ? r.topicTitle : ago(r.createdAt)}</strong>
               {showTopic && (
                 <span className="results-sub">
                   {SUBJECT_META[r.subject].label}, {r.grade}-sinf
                 </span>
               )}
-              {showTopic && <time>{new Date(r.createdAt).toLocaleString('uz-UZ')}</time>}
+              {showTopic && <time dateTime={r.createdAt} title={new Date(r.createdAt).toLocaleString('uz-UZ')}>{ago(r.createdAt)}</time>}
             </div>
             <div className="results-data">
               {Object.entries(r.data).map(([k, v]) => (

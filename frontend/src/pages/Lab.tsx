@@ -52,6 +52,7 @@ export default function Lab({ subject, grade, onSubject, onGrade }: Props) {
         <nav className="tabs" aria-label="Fanlar">
           {SUBJECTS.map((s) => (
             <button key={s} className={s === subject ? 'tab active' : 'tab'} data-subject={s} aria-pressed={s === subject} onClick={() => onSubject(s)}>
+              <i className="tab-dot" aria-hidden="true" />
               {SUBJECT_META[s].label}
             </button>
           ))}
@@ -89,7 +90,8 @@ export default function Lab({ subject, grade, onSubject, onGrade }: Props) {
             <div key={selected.id} className="swap-in">
               <h2>{selected.title}</h2>
               <p className="meta">
-                {SUBJECT_META[selected.subject].label}, {selected.grade}-sinf
+                <span className="badge">{SUBJECT_META[selected.subject].label}</span>
+                <span>{selected.grade}-sinf</span>
               </p>
               {Sim ? (
                 <SimStateContext.Provider value={setSimState}>

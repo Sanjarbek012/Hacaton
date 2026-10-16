@@ -13,10 +13,19 @@ export default function AiPanel({ topicId, state }: Props) {
   const [question, setQuestion] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
-  const endRef = useRef<HTMLDivElement>(null);
+  const logRef = useRef<HTMLDivElement>(null);
+  const lastRef = useRef<HTMLDivElement>(null);
 
+  // Faqat javob oynasining o'zi aylanadi (sahifa sakramaydi). Yangi AI javobi boshidan ko'rinadi, savol/yozmoqda esa pastga tushadi.
   useEffect(() => {
-    endRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    const log = logRef.current;
+    if (!log) return;
+    const last = msgs[msgs.length - 1];
+    if (!busy && last?.role === 'assistant' && lastRef.current) {
+      log.scrollTo({ top: Math.max(0, lastRef.current.offsetTop - 8), behavior: 'smooth' });
+    } else {
+      log.scrollTo({ top: log.scrollHeight, behavior: 'smooth' });
+    }
   }, [msgs, busy]);
 
   async function ask(mode: AiMode, label: string, q?: string) {
@@ -56,14 +65,18 @@ export default function AiPanel({ topicId, state }: Props) {
         </div>
       </div>
 
-      <div className="ai-log" aria-live="polite">
+      <div className="ai-log" aria-live="polite" ref={logRef}>
         {msgs.length === 0 && !busy && (
           <p className="note">
             Tajribani o‘zgartiring va “Nima sodir bo‘lyapti?” ni bosing. AI ko‘rayotgan qiymatlaringiz asosida sababini tushuntiradi.
           </p>
         )}
         {msgs.map((m, i) => (
-          <div key={i} className={m.role === 'user' ? 'bubble me' : 'bubble ai'}>
+          <div
+            key={i}
+            ref={i === msgs.length - 1 ? lastRef : undefined}
+            className={m.role === 'user' ? 'bubble me' : 'bubble ai'}
+          >
             {m.role === 'user' ? m.content : <RichText text={m.content} />}
           </div>
         ))}
@@ -73,7 +86,6 @@ export default function AiPanel({ topicId, state }: Props) {
           </div>
         )}
         {error && <p className="error">{error}</p>}
-        <div ref={endRef} />
       </div>
 
       <div className="ai-input">

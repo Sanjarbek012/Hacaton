@@ -46,7 +46,7 @@ export class AiService {
       `Fan: ${SUBJECT_UZ[topic.subject]}. Sinf: ${topic.grade}-sinf. Mavzu: ${topic.title}.`,
       `Tajriba maqsadi: ${goal}`,
       "O'zbek tilida (lotin yozuvi) yoz, oddiy va tushunarli, shu sinf o'quvchisiga mos. Hajmi 80–150 so'z.",
-      "Javob tuzilishi: 1) bitta qisqa jumlada asosiy xulosa; 2) 2–4 qisqa gapda sababi (nima uchun shunday bo'lishi); 3) bitta savol yoki keyingi qadam taklifi (masalan, qaysi parametrni o'zgartirib ko'rish).",
+      "Javob tuzilishi (3 ta qisqa abzats, orasida bo'sh qator): birinchisida bitta jumlada asosiy xulosa; ikkinchisida 2–4 qisqa gapda sababi; uchinchisida bitta savol yoki keyingi qadam taklifi (masalan, qaysi parametrni o'zgartirib ko'rish). 'Asosiy xulosa', 'Sabab', 'Keyingi qadam' kabi sarlavha yoki yorliq so'zlarni yozma, abzatslarni to'g'ridan-to'g'ri boshla.",
       "Tajriba holati berilgan bo'lsa, undagi 1–3 ta eng muhim sonni keltir va ularning bir-biriga ta'sirini tushuntir. Hamma qiymatni birma-bir sanab chiqma.",
       "Faqat shu laboratoriya va mavzu bo'yicha javob ber. Aniq bilmasang, taxmin qilma, shuni ayt. Formulalarni oddiy matnda yoz (masalan, v = g·t), LaTeX ishlatma.",
       "Xavfsizlik: real hayotda xavfli tajribalarni (zaharli gaz, portlovchi aralashmalar, xavfli moddalar tayyorlash) o'rgatma. Bunday so'rov bo'lsa, virtual tajribalar bilan cheklan va ustoz nazoratini eslat.",
@@ -74,9 +74,13 @@ export class AiService {
 
   /** Modeldan qolib ketgan markdown belgilarini tozalaydi (frontend ham ko'rsata oladi, lekin bu zaxira). */
   private tidy(text: string): string {
+    const label = '(?:asosiy xulosa|xulosa|sababi|sabab|sabablari|keyingi qadam|keyingi qadamlar|taklif)';
     return text
       .replace(/^#{1,6}\s+/gm, '')
       .replace(/\*\*(.+?)\*\*/g, '$1')
+      .replace(new RegExp(`^[ \\t]*${label}[ \\t]*:?[ \\t]*$`, 'gim'), '') // yolg'iz turgan yorliq qatori
+      .replace(new RegExp(`^[ \\t]*${label}[ \\t]*:[ \\t]*`, 'gim'), '') // "Sabab: ..." boshidagi yorliq
+      .replace(/^[ \t]*(?:asosiy xulosa|keyingi qadam)[ \t]+(?=\S)/gim, '') // ikki so'zli yorliq ikki nuqtasiz
       .replace(/\n{3,}/g, '\n\n')
       .trim();
   }

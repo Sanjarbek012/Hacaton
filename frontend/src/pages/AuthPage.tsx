@@ -14,6 +14,7 @@ export default function AuthPage() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPw, setShowPw] = useState(false);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
@@ -96,7 +97,16 @@ export default function AuthPage() {
           </label>
           <label className="field">
             Parol
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete={mode === 'login' ? 'current-password' : 'new-password'} placeholder={mode === 'login' ? '' : 'Kamida 6 ta belgi'} />
+            <span className="pw-wrap">
+              <input type={showPw ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} autoComplete={mode === 'login' ? 'current-password' : 'new-password'} placeholder={mode === 'login' ? '' : 'Kamida 6 ta belgi'} />
+              <button type="button" className="pw-eye" onClick={() => setShowPw((v) => !v)} aria-label={showPw ? 'Parolni yashirish' : 'Parolni ko‘rsatish'} aria-pressed={showPw} title={showPw ? 'Yashirish' : 'Ko‘rsatish'}>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" />
+                  <circle cx="12" cy="12" r="3" />
+                  {showPw && <path d="M4 4l16 16" />}
+                </svg>
+              </button>
+            </span>
           </label>
 
           {error && <p key={error} className="error shake" role="alert">{error}</p>}

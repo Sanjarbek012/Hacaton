@@ -641,3 +641,11 @@ body {
   .ai-input input { min-width: 0; }
   .ai-input .btn { flex-shrink: 0; padding: 8px 14px; }
 }
+
+/* Parol maydoni: ko'z tugmasi */
+.pw-wrap { position: relative; display: block; }
+.pw-wrap input { width: 100%; padding-right: 46px; }
+.pw-eye { position: absolute; top: 50%; right: 6px; transform: translateY(-50%); width: 36px; height: 36px; display: grid; place-items: center; background: transparent; border: 0; border-radius: 10px; color: var(--muted); cursor: pointer; transition: color .15s, background .15s; }
+.pw-eye:hover { color: var(--ink); background: rgba(255, 255, 255, .06); }
+.pw-eye[aria-pressed='true'] { color: var(--accent); }
+.pw-eye:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }

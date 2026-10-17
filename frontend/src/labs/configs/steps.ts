@@ -2,6 +2,7 @@ import type { StepDef } from '../StepperLab';
 
 export const STEPS: Record<string, StepDef> = {
   'b8-bonechem': {
+    scene: 'bone',
     intro: 'Suyak tarkibida organik va anorganik moddalar borligini ikki tajriba bilan isbotlang.',
     steps: [
       { title: 'Tajriba materiali', text: 'Ikkita bir xil tovuq suyagi olinadi. Birinchisi kislotada, ikkinchisi olovda sinab ko‘riladi.' },
@@ -13,6 +14,7 @@ export const STEPS: Record<string, StepDef> = {
     ],
   },
   'b9-plasmolysis': {
+    scene: 'plasmo',
     intro: 'Piyoz po‘sti hujayralarida plazmoliz va deplazmoliz hodisasini bosqichma-bosqich kuzating.',
     steps: [
       { title: 'Tayyorlash', text: 'Qizil piyozning ustki po‘sti buyum oynachasiga suv tomizib qo‘yiladi va mikroskopda ko‘riladi. Hujayralar turgor holatida: vakuola to‘lib, sitoplazma hujayra devoriga taqalib turadi.' },

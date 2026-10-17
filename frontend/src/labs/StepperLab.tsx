@@ -2,9 +2,11 @@ import { useEffect, useState, type ComponentType } from 'react';
 import SaveBar from '../components/SaveBar';
 import type { SimProps } from '../types';
 import { K, Svg } from './common';
+import { BoneScene, PlasmoScene } from './bioscenes';
 
 export interface StepDef {
   intro: string;
+  scene?: 'bone' | 'plasmo';
   steps: { title: string; text: string; art?: number }[];
 }
 
@@ -69,7 +71,7 @@ export function makeStepperLab(def: StepDef): ComponentType<SimProps> {
     return (
       <div className="lab">
         <div className="stage">
-          {s.art !== undefined ? <Mitosis ph={s.art} /> : <Flow steps={def.steps} i={i} />}
+          {def.scene === 'bone' ? <BoneScene i={i} /> : def.scene === 'plasmo' ? <PlasmoScene i={i} /> : s.art !== undefined ? <Mitosis ph={s.art} /> : <Flow steps={def.steps} i={i} />}
           <div key={i} className="step-text"><b>{i + 1}. {s.title}</b><p>{s.text}</p></div>
         </div>
         <div className="panel">

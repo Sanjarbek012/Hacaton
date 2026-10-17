@@ -83,12 +83,14 @@ export const CURRICULUM: Record<Subject, Record<number, Item[]>> = {
       ['Qon va qon aylanish', 'b8-heart'], ['Nafas olish sistemasi', 'b8-lungs'], ['Ovqat hazm qilish', 'b8-enzyme'],
       ['Moddalar almashinuvi va osmos', 'osmosis'], ['Ayirish sistemasi', 'b8-kidney'], ['Nerv sistemasi', 'b8-reflex'],
       ['Sezgi organlari', 'b8-eye'], ['Endokrin sistema', 'b8-glucose'], ["Ko'payish va rivojlanish", 'b8-development'],
+      ["Suyakning kimyoviy tarkibini o'rganish", 'b8-bonechem'], ['Organik va anorganik moddalar', 'b8-orginorg'],
     ],
     9: [
       ['Hayot darajalari', 'b9-levels'], ['Hujayra nazariyasi', 'b9-celltheory'], ['Hujayra organoidlari', 'b9-organelles'],
       ["Hujayra bo'linishi: mitoz va meyoz", 'b9-mitosis'], ['Modda va energiya almashinuvi', 'b9-metabolism'],
       ['Fotosintez va xemosintez', 'b9-chemosynth'], ["Irsiyat va o'zgaruvchanlik", 'b9-variation'],
       ['Mendel qonunlari', 'b9-mendel'], ['Genetika asoslari', 'b9-genetics'],
+      ['Plazmoliz va deplazmoliz', 'b9-plasmolysis'],
     ],
     10: [
       ["Evolyutsiya: Darvin ta'limoti", 'b10-selection'], ['Tur va turlanish', 'b10-speciation'], ['Populyatsiya genetikasi', 'b10-popgen'], ['Seleksiya', 'b10-breeding'],

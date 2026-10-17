@@ -1,6 +1,28 @@
 import type { StepDef } from '../StepperLab';
 
 export const STEPS: Record<string, StepDef> = {
+  'b8-bonechem': {
+    intro: 'Suyak tarkibida organik va anorganik moddalar borligini ikki tajriba bilan isbotlang.',
+    steps: [
+      { title: 'Tajriba materiali', text: 'Ikkita bir xil tovuq suyagi olinadi. Birinchisi kislotada, ikkinchisi olovda sinab ko‘riladi.' },
+      { title: '1-tajriba: kislotaga solish', text: 'Birinchi suyak 10% li xlorid kislota eritmasiga 1–2 kunga solinadi. Kislota suyakdagi mineral tuzlarni (kalsiy tuzlari) eritib yuboradi, bunda gaz pufakchalari ajraladi.' },
+      { title: '1-natija: egiluvchan suyak', text: 'Suyak shaklini saqlaydi, lekin yumshab, tugunga bog‘lash mumkin bo‘lib qoladi. Demak, suyakka qattiqlik beradigan anorganik (mineral) moddalar ketdi, egiluvchanlik beruvchi organik moddalar (ossein) qoldi.' },
+      { title: '2-tajriba: olovda kuydirish', text: 'Ikkinchi suyak spirt lampa alangasida qizdiriladi. Organik moddalar (oqsil, yog‘) yonib ketadi, suyak dastlab qorayadi, so‘ng oqaradi.' },
+      { title: '2-natija: mo‘rt suyak', text: 'Suyak shaklini saqlaydi, lekin engil bosilsa uvalanib, kukunga aylanadi. Demak, mustahkamlik beruvchi anorganik moddalar qoldi, organik moddalar yonib ketdi.' },
+      { title: 'Xulosa', text: 'Suyak taxminan 1/3 organik moddalardan (egiluvchanlik) va 2/3 anorganik moddalardan (qattiqlik) iborat. Yoshlarda organik moddalar ko‘proq, shuning uchun suyaklari egiluvchan; keksalarda anorganik moddalar ko‘p, suyaklari mo‘rt.' },
+    ],
+  },
+  'b9-plasmolysis': {
+    intro: 'Piyoz po‘sti hujayralarida plazmoliz va deplazmoliz hodisasini bosqichma-bosqich kuzating.',
+    steps: [
+      { title: 'Tayyorlash', text: 'Qizil piyozning ustki po‘sti buyum oynachasiga suv tomizib qo‘yiladi va mikroskopda ko‘riladi. Hujayralar turgor holatida: vakuola to‘lib, sitoplazma hujayra devoriga taqalib turadi.' },
+      { title: 'Konsentrlangan eritma qo‘shish', text: 'Preparat chetiga 10% li osh tuzi (yoki shakar) eritmasi tomiziladi. Eritma hujayra ichidagi shirasidan quyuqroq (gipertonik).' },
+      { title: 'Plazmoliz', text: 'Suv vakuoladan tashqariga chiqadi. Vakuola kichrayadi, sitoplazma hujayra devoridan ajralib, o‘rtaga yig‘iladi. Hujayra devori shaklini saqlaydi. Bu hodisa plazmoliz deyiladi.' },
+      { title: 'Suv bilan yuvish', text: 'Preparat chetiga toza suv tomizib, tuz eritmasi yuvib yuboriladi. Endi tashqi muhit hujayra shirasidan suyuqroq (gipotonik).' },
+      { title: 'Deplazmoliz', text: 'Suv osmos bilan hujayraga qaytib kiradi, vakuola kengayadi va sitoplazma hujayra devoriga yana taqaladi. Hujayra avvalgi holatiga qaytadi. Bu hodisa deplazmoliz deyiladi.' },
+      { title: 'Xulosa', text: 'Plazmoliz — suv chiqib ketishi tufayli sitoplazmaning devordan ajralishi (qaytar jarayon). Deplazmoliz — suv qaytib kirishi bilan hujayra holatining tiklanishi. Bu tirik hujayralarning yarim o‘tkazuvchan membranasi borligini isbotlaydi. Juda uzoq plazmolizda hujayra halok bo‘lishi mumkin.' },
+    ],
+  },
   'b9-mitosis': {
     intro: 'Hujayra bo‘linishi bosqichlarini birma-bir ko‘ring. Xromosomalar harakatiga e’tibor bering.',
     steps: [

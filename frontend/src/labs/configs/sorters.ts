@@ -204,6 +204,22 @@ export const SORTERS: Record<string, SortDef> = {
       { text: 'Gipofiz', cat: 'd', hint: 'Boshqa bezlar faoliyatini boshqaruvchi endokrin bez.' },
     ],
   },
+  'b8-orginorg': {
+    intro: 'Moddani organik yoki anorganik guruhga joylashtiring.',
+    cats: [{ id: 'o', label: 'Organik' }, { id: 'a', label: 'Anorganik' }],
+    items: [
+      { text: 'Oqsillar', cat: 'o', hint: 'Organik: hujayraning qurilish materiali, aminokislotalardan tuzilgan.' },
+      { text: 'Yog‘lar (lipidlar)', cat: 'o', hint: 'Organik: energiya zaxirasi va membrana tarkibi.' },
+      { text: 'Uglevodlar (glyukoza, kraxmal)', cat: 'o', hint: 'Organik: asosiy energiya manbai.' },
+      { text: 'DNK va RNK', cat: 'o', hint: 'Organik: nuklein kislotalar, irsiy axborotni saqlaydi.' },
+      { text: 'Vitaminlar', cat: 'o', hint: 'Organik birikmalar, oz miqdorda zarur.' },
+      { text: 'Suv', cat: 'a', hint: 'Anorganik: hujayra massasining 70–80% ini tashkil qiladi.' },
+      { text: 'Osh tuzi (NaCl)', cat: 'a', hint: 'Anorganik: mineral tuz.' },
+      { text: 'Kalsiy fosfat', cat: 'a', hint: 'Anorganik tuz: suyak va tishga qattiqlik beradi.' },
+      { text: 'Temir ionlari', cat: 'a', hint: 'Anorganik: gemoglobin tarkibida kislorod tashiydi.' },
+      { text: 'Karbonat angidrid (CO₂)', cat: 'a', hint: 'Anorganik: nafas olish mahsuloti, fotosintez xomashyosi.' },
+    ],
+  },
   'b8-tissues': {
     intro: 'To‘qima yoki uning vazifasini tegishli to‘qima turiga joylashtiring.',
     cats: [{ id: 'e', label: 'Epiteliy' }, { id: 'b', label: 'Biriktiruvchi' }, { id: 'm', label: 'Muskul' }, { id: 'n', label: 'Nerv' }],

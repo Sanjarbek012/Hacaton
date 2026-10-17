@@ -16,16 +16,12 @@ export default function AiPanel({ topicId, state }: Props) {
   const logRef = useRef<HTMLDivElement>(null);
   const lastRef = useRef<HTMLDivElement>(null);
 
-  // Faqat javob oynasining o'zi aylanadi (sahifa sakramaydi). Yangi AI javobi boshidan ko'rinadi, savol/yozmoqda esa pastga tushadi.
+  // Javob to'liq ochiq turadi (oyna ichida aylantirilmaydi). Yangi javob boshidan ko'rinadi, sahifa shu yerga siljiydi.
   useEffect(() => {
-    const log = logRef.current;
-    if (!log) return;
     const last = msgs[msgs.length - 1];
-    if (!busy && last?.role === 'assistant' && lastRef.current) {
-      log.scrollTo({ top: Math.max(0, lastRef.current.offsetTop - 8), behavior: 'smooth' });
-    } else {
-      log.scrollTo({ top: log.scrollHeight, behavior: 'smooth' });
-    }
+    if (!last) return;
+    if (busy || last.role === 'user') logRef.current?.lastElementChild?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    else lastRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' });
   }, [msgs, busy]);
 
   async function ask(mode: AiMode, label: string, q?: string) {

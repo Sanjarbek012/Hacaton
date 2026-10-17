@@ -14,6 +14,12 @@ export const SIM_GOALS: Record<string, string> = {
     "Yorug'lik, CO2 miqdori va temperaturaning fotosintez tezligiga (kislorod pufakchalari soniga) ta'sirini kuzatish; cheklovchi omil tushunchasi.",
   osmosis:
     "Hujayrani turli konsentratsiyali NaCl eritmasiga solib, suvning hujayraga kirishi yoki chiqishini (bo'rtish, plazmoliz) kuzatish. Hujayra ichida 0.9% tuz bor.",
+  'b8-bonechem':
+    "Suyakni xlorid kislotaga solib (mineral tuzlar eriydi, suyak egiluvchan bo'ladi) va olovda kuydirib (organik moddalar yonadi, suyak mo'rt bo'ladi) uning organik va anorganik moddalardan iboratligini isbotlash.",
+  'b8-orginorg':
+    "Moddalarni (oqsil, yog', uglevod, DNK, suv, tuzlar, CO₂ va h.k.) organik yoki anorganik guruhga ajratish.",
+  'b9-plasmolysis':
+    "Piyoz po'sti hujayrasini konsentrlangan tuz eritmasiga solib plazmolizni (suv chiqishi, sitoplazma devordan ajralishi), keyin suv bilan yuvib deplazmolizni (suv qaytishi, holat tiklanishi) kuzatish.",
   mixing:
     "Ikki moddani (kislota, asos, tuz, metall, indikator) aralashtirib, reaksiya belgilarini (gaz, cho'kma, rang, isish) kuzatish va reaksiya tenglamasini tushunish.",
 
